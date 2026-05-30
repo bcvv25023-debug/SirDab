@@ -20,6 +20,11 @@ jobs:
       - name: Unzip project
         run: unzip SirDabaDelivery_NativeApp_Complete.zip
 
+      - name: Fix splash layout
+        run: |
+          sed -i 's/app:layout_constraintVerticalBias/android:translationY/g' \
+            SirDabaApp/app/src/main/res/layout/activity_splash.xml
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
