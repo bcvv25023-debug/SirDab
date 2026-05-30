@@ -22,7 +22,7 @@ jobs:
 
       - name: Fix splash layout
         run: |
-          sed -i 's/app:layout_constraintVerticalBias/android:translationY/g' \
+          sed -i '/layout_constraintVerticalBias/d' \
             SirDabaApp/app/src/main/res/layout/activity_splash.xml
 
       - name: Setup Gradle
@@ -35,6 +35,11 @@ jobs:
         working-directory: SirDabaApp
         run: gradle assembleDebug
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SirDaba-debug-apk
+          path: SirDabaApp/app/build/outputs/apk/debug/*.apk
+          retention-days: 7
       - uses: actions/upload-artifact@v4
         with:
           name: SirDaba-debug-apk
